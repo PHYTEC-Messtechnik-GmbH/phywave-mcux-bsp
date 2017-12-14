@@ -1,0 +1,6 @@
+device ${JLINK_DEVICE}
+halt
+loadfile ${EXECUTABLE_OUTPUT_PATH}/${BINARY}, ${FLASH_START}
+verifybin ${EXECUTABLE_OUTPUT_PATH}/${BINARY}, ${FLASH_START}
+r
+exit
