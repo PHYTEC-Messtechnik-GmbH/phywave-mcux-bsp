@@ -51,7 +51,11 @@ add_executable(${TARGET}
 include(${PHYWAVE_SDK_DIR}/cmake/framework.cmake)
 include_directories(${PHYWAVE_SDK_DIR}/drivers/pn-athena)
 include_directories(${PHYWAVE_SDK_DIR}/drivers/ssd1673)
+include_directories(${PHYWAVE_SDK_DIR}/drivers/tcs37727)
+include_directories(${PHYWAVE_SDK_DIR}/drivers/hdc1010)
+include_directories(${PHYWAVE_SDK_DIR}/drivers/ccs811)
 include_directories(${PHYWAVE_SDK_DIR}/drivers/spi)
+include_directories(${PHYWAVE_SDK_DIR}/drivers/i2c)
 
 target_sources(${TARGET} PUBLIC
 "${TARGET_DIR}/src/app_config.c"
@@ -61,6 +65,10 @@ target_sources(${TARGET} PUBLIC
 "${PHYWAVE_SDK_DIR}/drivers/pn-athena/clock_config.c"
 "${PHYWAVE_SDK_DIR}/drivers/pn-athena/adc_soc.c"
 "${PHYWAVE_SDK_DIR}/drivers/ssd1673/ssd1673.c"
+"${PHYWAVE_SDK_DIR}/drivers/tcs37727/tcs37727.c"
+"${PHYWAVE_SDK_DIR}/drivers/hdc1010/hdc1010.c"
+"${PHYWAVE_SDK_DIR}/drivers/ccs811/ccs811.c"
+"${PHYWAVE_SDK_DIR}/drivers/i2c/i2c_wrapper.c"
 )
 
 message(STATUS "used MIDDLEWARE LIBS: " ${MCUX_MIDDLEWARE_LIBS})

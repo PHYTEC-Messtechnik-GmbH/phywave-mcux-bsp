@@ -25,6 +25,18 @@ The phyNODE's display is interfaced via the following BLE characteristics:
 - `f000aa23-0451-4000-b000-000000000000` Update the display and show the written
   data. One packet should be 1 byte long containg the value `0x00`.
 
+The sensors can be accessed by the following characteristics:
+
+- `ac0baa31-a2e0-455e-bd2b-a56ac38df71c` Sensor Control, reserved
+- `ac0baa32-a2e0-455e-bd2b-a56ac38df71c` Temperature, read-only, 16 bit
+  temperature, 16 bit humidity. Both values are to be divided by 100 to get the
+  correct floating point value (e.g. 2671/100 = 26.71).
+- `ac0baa33-a2e0-455e-bd2b-a56ac38df71c` Light, read-only, 8 bit red, 8 bit
+  green, 8 bit blue, 32 bit illuminance (in Lux), 32 bit color temperature (in
+  Kelvin)
+- `ac0baa34-a2e0-455e-bd2b-a56ac38df71c` Air quality, read-only, 16 bit CO2
+  value, 16 bit TVOC value, 8 bit sensor status
+
 ## FAQ for developing your own BLE application
 
 ### NXP Documentation on Bluetooth Low Energy

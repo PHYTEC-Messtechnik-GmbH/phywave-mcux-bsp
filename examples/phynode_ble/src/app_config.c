@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 PHYTEC Messtechnik GmbH
+ * Copyright (c) 2017-2018 PHYTEC Messtechnik GmbH
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -139,7 +139,7 @@ static const gapServiceSecurityRequirements_t serviceSecurity[] = {
 			.authorization = FALSE,
 			.minimumEncryptionKeySize = gDefaultEncryptionKeySize_d
 		},
-		.serviceHandle = service_temperature
+		.serviceHandle = service_sensors
 	},
 	{
 		.requirements = {
@@ -155,20 +155,12 @@ static const gapServiceSecurityRequirements_t serviceSecurity[] = {
 			.authorization = FALSE,
 			.minimumEncryptionKeySize = gDefaultEncryptionKeySize_d
 		},
-		.serviceHandle = service_battery
-	},
-	{
-		.requirements = {
-			.securityModeLevel = gSecurityMode_1_Level_1_c,
-			.authorization = FALSE,
-			.minimumEncryptionKeySize = gDefaultEncryptionKeySize_d
-		},
 		.serviceHandle = service_device_info
 	}
 };
 
 gapDeviceSecurityRequirements_t deviceSecurityRequirements = {
 	.pMasterSecurityRequirements = (void *) &masterSecurity,
-	.cNumServices = 4,
+	.cNumServices = 3,
 	.aServiceSecurityRequirements = (void *) serviceSecurity
 };

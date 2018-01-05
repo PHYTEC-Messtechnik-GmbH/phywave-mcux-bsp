@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 PHYTEC Messtechnik GmbH
+ * Copyright (c) 2017-2018 PHYTEC Messtechnik GmbH
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -31,19 +31,17 @@ PRIMARY_SERVICE(service_gatt, gBleSig_GenericAttributeProfile_d)
 
 PRIMARY_SERVICE(service_gap, gBleSig_GenericAccessProfile_d)
 	CHARACTERISTIC(char_device_name, gBleSig_GapDeviceName_d, (gGattCharPropRead_c))
-		VALUE(value_device_name, gBleSig_GapDeviceName_d, (gPermissionFlagReadable_c), 12, "FSL_BLE_TEMP")
+		VALUE(value_device_name, gBleSig_GapDeviceName_d, (gPermissionFlagReadable_c), sizeof(BOARD_NAME), BOARD_NAME)
 
-PRIMARY_SERVICE_UUID128(service_temperature, uuid_service_temperature)
-	CHARACTERISTIC(char_temperature, gBleSig_Temperature_d, (gGattCharPropNotify_c | gGattCharPropRead_c))
-		VALUE(value_temperature, gBleSig_Temperature_d, (gPermissionFlagReadable_c), 2, 0x00, 0xB4)
-		DESCRIPTOR(desc_temperature, gBleSig_CharPresFormatDescriptor_d, (gPermissionFlagReadable_c), 7, 0x0E, 0xFE, 0x2F, 0x27, 0x00, 0x00, 0x00)
-		CCCD(cccd_temperature)
-
-PRIMARY_SERVICE(service_battery, gBleSig_BatteryService_d)
-	CHARACTERISTIC(char_battery_level, gBleSig_BatteryLevel_d, (gGattCharPropNotify_c | gGattCharPropRead_c))
-		VALUE(value_battery_level, gBleSig_BatteryLevel_d, (gPermissionFlagReadable_c), 1, 0x5A)
-		DESCRIPTOR(desc_bat_level, gBleSig_CharPresFormatDescriptor_d, (gPermissionFlagReadable_c), 7, 0x04, 0x00, 0xAD, 0x27, 0x01, 0x01, 0x00)
-		CCCD(cccd_battery_level)
+PRIMARY_SERVICE_UUID128(service_sensors, uuid_service_sensors)
+	CHARACTERISTIC_UUID128(char_sensors_ctrl, uuid_char_sensors_ctrl, (gGattCharPropRead_c | gGattCharPropWrite_c))
+		VALUE_UUID128(value_sensors_ctrl, uuid_char_sensors_ctrl, (gPermissionFlagReadable_c | gPermissionFlagWritable_c), 1, 0x00)
+	CHARACTERISTIC_UUID128(char_temp, uuid_char_temp, (gGattCharPropRead_c))
+		VALUE_UUID128(value_temp, uuid_char_temp, (gPermissionFlagReadable_c), 4, 0x00, 0x00, 0x00, 0x00)
+	CHARACTERISTIC_UUID128(char_light, uuid_char_light, (gGattCharPropRead_c))
+		VALUE_UUID128(value_light, uuid_char_light, (gPermissionFlagReadable_c), 11, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00)
+	CHARACTERISTIC_UUID128(char_env, uuid_char_env, (gGattCharPropRead_c))
+		VALUE_UUID128(value_env, uuid_char_env, (gPermissionFlagReadable_c), 5, 0x00, 0x00, 0x00, 0x00, 0x00)
 
 PRIMARY_SERVICE_UUID128(service_epaper, uuid_service_epaper)
 	CHARACTERISTIC_UUID128(char_epaper_init, uuid_char_epaper_init, (gGattCharPropRead_c | gGattCharPropWrite_c))
@@ -57,7 +55,7 @@ PRIMARY_SERVICE(service_device_info, gBleSig_DeviceInformationService_d)
 	CHARACTERISTIC(char_manuf_name, gBleSig_ManufacturerNameString_d, (gGattCharPropRead_c))
 		VALUE(value_manuf_name, gBleSig_ManufacturerNameString_d, (gPermissionFlagReadable_c), sizeof(MANUFACTURER_NAME), MANUFACTURER_NAME)
 	CHARACTERISTIC(char_model_no, gBleSig_ModelNumberString_d, (gGattCharPropRead_c))
-		VALUE(value_model_no, gBleSig_ModelNumberString_d, (gPermissionFlagReadable_c), 16, "Temp Sensor Demo")
+		VALUE(value_model_no, gBleSig_ModelNumberString_d, (gPermissionFlagReadable_c), sizeof(BOARD_NAME), BOARD_NAME)
 	CHARACTERISTIC(char_serial_no, gBleSig_SerialNumberString_d, (gGattCharPropRead_c))
 		VALUE(value_serial_no, gBleSig_SerialNumberString_d, (gPermissionFlagReadable_c), 7, "BLESN01")
 	CHARACTERISTIC(char_hw_rev, gBleSig_HardwareRevisionString_d, (gGattCharPropRead_c))
